@@ -2,7 +2,7 @@ class KicadWxwidgets < Formula
   desc "Custom patched version of wxwidgets, only for use by KiCad."
   homepage "https://kicad-pcb.org"
   url "https://github.com/KiCad/wxWidgets/archive/kicad/macos-wx-3.0.zip"
-  sha256 "71dfa7128c871a50d44432117e75144cf0218819a7efb1ecf7f24ee8b8f3bd5f"
+  sha256 "56f49449849b9cae15e44ed4d57c9f7c088767d2e503e9c1b9aa83edf698b3aa"
   head "https://github.com/KiCad/wxWidgets.git", :branch => "kicad/macos-wx-3.0"
   keg_only "custom patched version of wxWidgets, only for use by KiCad"
 
@@ -61,6 +61,6 @@ class KicadWxwidgets < Formula
   end
 
   test do
-    1 # FIXME pls 
+    1 # FIXME pls
   end
 end
