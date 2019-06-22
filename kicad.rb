@@ -7,7 +7,7 @@ class Kicad < Formula
 
  # option "with-nice-curves", "Uses smoothness of curves in pcbnew visually and in plotted outputs (like gerbers). Most systems shouldn't see a meaningful performance impact."
   #option "with-mc-defaults", "Patch so new pcbnew files are created with metacollin's preferred defaults.  This is for metacollin's own use and is neither supported or recommended."
-  
+
 
   conflicts_with "wxmac", :because => "pcbnew doesn't work correctly if it is installed.  Hopefully fixed soon."
   conflicts_with "wxpython", :because => "pcbnew doesn't work correctly if it is installed.  Hopefully fixed soon."
@@ -34,10 +34,10 @@ class Kicad < Formula
   depends_on "swig" => :build if build.with? "python"
   depends_on "xz"
   depends_on "glm"
-  depends_on "metacollin/kicad/kicad-wxwidgets"
+  depends_on "ebod/kicad/kicad-wxwidgets"
   depends_on "oce" => :optional
   depends_on "libngspice" => :optional
-  depends_on "metacollin/kicad/kicad-wxpython" if build.with? "python"
+  depends_on "ebod/kicad/kicad-wxpython" if build.with? "python"
   #depends_on "metacollin/kicad/kicad-library" => :recommended
 
   if (build.with? "libngspice") && build.stable?
@@ -67,7 +67,7 @@ class Kicad < Formula
 
 
    #  if build.with? "nice-curves"
-   #    if build.stable? 
+   #    if build.stable?
    #      inreplace "gerbview/dcode.cpp", "define SEGS_CNT 32", "define SEGS_CNT 128"
    #      inreplace "gerbview/export_to_pcbnew.cpp", "SEG_COUNT_CIRCLE    16", "SEG_COUNT_CIRCLE    64"
    #      inreplace "gerbview/class_aperture_macro.cpp", "const int seg_per_circle = 64", "const int seg_per_circle = 256"
@@ -107,12 +107,12 @@ class Kicad < Formula
    #  end
 
     mkdir "build" do
-      ENV.prepend_create_path "PYTHONPATH", "#{Formula["metacollin/kicad/kicad-wxpython"].lib}/python2.7/site-packages" if build.with? "python"
+      ENV.prepend_create_path "PYTHONPATH", "#{Formula["ebod/kicad/kicad-wxpython"].lib}/python2.7/site-packages" if build.with? "python"
 
       args = %W[
         -DCMAKE_INSTALL_PREFIX=#{prefix}
         -DCMAKE_OSX_DEPLOYMENT_TARGET=#{MacOS.version}
-        -DwxWidgets_CONFIG_EXECUTABLE=#{Formula["metacollin/kicad/kicad-wxwidgets"].bin}/wx-config
+        -DwxWidgets_CONFIG_EXECUTABLE=#{Formula["ebod/kicad/kicad-wxwidgets"].bin}/wx-config
         -DCMAKE_C_COMPILER=#{ENV.cc}
         -DCMAKE_CXX_COMPILER=#{ENV.cxx}
       ]
@@ -125,7 +125,7 @@ class Kicad < Formula
       end
 
       if build.with? "python"
-        args << "-DPYTHON_SITE_PACKAGE_PATH=#{Formula["metacollin/kicad/kicad-wxpython"].lib}/python2.7/site-packages"
+        args << "-DPYTHON_SITE_PACKAGE_PATH=#{Formula["ebod/kicad/kicad-wxpython"].lib}/python2.7/site-packages"
         args << "-DKICAD_SCRIPTING=ON"
         args << "-DKICAD_SCRIPTING_MODULES=ON"
         args << "-DKICAD_SCRIPTING_WXPYTHON=ON"
